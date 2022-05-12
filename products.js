@@ -3,7 +3,7 @@ const products = [
     title: "Uva Crimson",
     price: 8.99,
     category: "Frutas",
-    image: undefined,
+    image: "./img/products/no-img.svg",
     imageDescription: "",
   },
   {
@@ -31,7 +31,7 @@ const products = [
     title: "Refrigerante",
     price: 8.99,
     category: "Bebidas",
-    image: undefined,
+    image: "./img/products/no-img.svg",
     imageDescription: "",
   },
   {
@@ -45,7 +45,7 @@ const products = [
     title: "Água Tônica",
     price: 8.99,
     category: "Bebidas",
-    image: undefined,
+    image: "./img/products/no-img.svg",
     imageDescription: "",
   },
   {
@@ -84,7 +84,64 @@ const products = [
     title: "Lustra Móveis",
     price: 8.99,
     category: "Higiene",
-    image: undefined,
+    image: "./img/products/no-img.svg",
     imageDescription: "",
   },
 ];
+
+function marketInit(){
+  let inicioLoja = document.querySelector(".container")
+  let categoryRepeat = []
+  let element =["fruits", "drinks", "hygiene"]
+  let elementId = [".fruits", ".drinks", ".hygiene"]
+  for (let i = 0 ; i < products.length;  i++ ){
+    categoryRepeat.push(products[i].category)
+  }
+  let categoria = Array.from(new Set(categoryRepeat))
+  for(let i = 0 ; i < categoria.length ; i++){
+    inicioLoja.innerHTML += 
+    `<section class="products-section"> 
+    <h1>`+ categoria[i]+`</h1>
+    <main class="products-content `+element[i]+`">
+    </main>
+    </section>`
+
+    let category = products.filter((item) => item.category === categoria[i] )
+    let ulInit = document.createElement("ul")
+   document.querySelector(elementId[i]).appendChild(ulInit)
+    let product = document.querySelector(elementId[i] + " ul")
+
+    for(let x = 0; x < category.length ; x++) {
+    product.innerHTML += `
+    <li class="product">
+              <img
+                src="`+category[x].image+`"
+                alt="`+category[x].imageDescription+`"
+                title="`+category[x].title+`"
+                class="product-img"
+              />
+              <main class="product-main">
+                <h1 class="product-title">`+category[x].title+`</h1>
+                <h5 class="product-category">`+category[x].category+`</h5>
+                <strong class="product-price">R$ `+category[x].price+`</strong>
+              </main>
+            </li>
+    ` 
+  }
+    } 
+}
+marketInit()
+
+nave()
+function nave(){
+  let navegacao = document.createElement("nav")
+  let navi = document.querySelector("body")
+  let y = document.querySelector(".container")
+
+  navi.insertBefore(navegacao, y)
+  let image = document.createElement("img")
+  image.setAttribute("src", "./img/brand/logo.svg")
+  document.querySelector("nav").appendChild(image)
+  
+
+}
